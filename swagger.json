@@ -1,0 +1,904 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0-oas3"
+  title: Redervo
+  description: This is a API documentaion for Reservo App
+  contact:
+    name: Asmaa Abo El-Hassan
+    email: asmaa.abohassan@brand4it.com
+  license:
+    name: Reservo
+    url: 'http://reservo-sa.com'
+servers:
+  - url: 'http://reservo-sa.com/api'
+tags:
+  - name: user and delegate
+  - name: user
+paths:
+  '/{language}/register':
+    post:
+      tags:
+        - user 
+      description: >-
+        (1) device_type = 'android' OR 'ios'
+      operationId: register
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: phone
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: username
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: country_id
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: city_id
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: section_id
+          required: false
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: user_type
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: password_confirmation
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: device_token
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: device_type
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+  '/{language}/get-user':
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user and delegate
+      description: ' '
+      operationId: get-user
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+  
+  '/{language}/edit-personal-info':
+    post:
+      tags:
+        - 'user'
+      security:
+        - bearerAuth: []
+      description: ' '
+      operationId: edit-personal-info
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: username
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: country_id
+          required: false
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: city_id
+          required: false
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: section_id
+          required: false
+          style: form
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /change-phone:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: change-phone
+      parameters:
+        - in: query
+          name: current_phone
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: phone
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /update-changed-phone:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: update-changed-phone
+      parameters:
+        - in: query
+          name: confirmed_phone
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /change-email:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: change-email
+      parameters:
+        - in: query
+          name: old_email
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: email
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /confirm-change-email-code:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: confirm-change-email-code
+      parameters:
+        - in: query
+          name: code
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /change-password:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: change-password
+      parameters:
+        - in: query
+          name: new_password
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: password_confirmation
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  '/{language}/login':
+    post:
+      tags:
+        - user 
+      description: 
+        (1) device_type = 'android' OR 'ios', (2) application_type = 
+        'user' or delegate
+      operationId: login
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: application_type
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: device_token
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: device_type
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /forget-password:
+    post:
+      tags:
+        - user 
+      description: ''
+      operationId: forget-password
+      parameters:
+        - name: email
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /resend-reset-code:
+    post:
+      tags:
+        - user 
+      description: ''
+      operationId: resend-reset-code
+      parameters:
+        - name: email
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /confirm-reset-code:
+    post:
+      tags:
+        - user 
+      description: ''
+      operationId: confirm-reset-code
+      parameters:
+        - name: email
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: reset_code
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /reset-password:
+    post:
+      tags:
+        - user 
+      description: ''
+      operationId: reset-password
+      parameters:
+        - name: email
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: password_confirmation
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /refresh-token:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: refresh-token
+      parameters:
+        - in: query
+          name: old_token
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: new_token
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /logout:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: logout
+      parameters:
+        - in: query
+          name: old_token
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /list-notifications:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user and delegate
+      description: >-
+        types= [ '1' => 'active account', '2' => 'new activity', '3' => 'from
+        admin', '4' => 'form admin to all users']
+      operationId: list-notifications
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /enable-notification:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user and delegate
+      description: 'is_open is ''1 OR 0'' '
+      operationId: enable-notification
+      parameters:
+        - in: query
+          name: device_token
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: is_open
+          required: true
+          style: form
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /contact-us:
+    post:
+      tags:
+        - user and delegate 
+      description: ''
+      operationId: contact-us
+      parameters:
+        - in: query
+          name: name
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: email
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: message
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  '/{language}/faqs':
+    get:
+      tags:
+        - user and delegate 
+      description: lang should be "ar" OR "en" ONLY
+      operationId: faq
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  '/{language}/about':
+    get:
+      tags:
+        - user and delegate 
+      description: lang should be "ar" OR "en" ONLY
+      operationId: about
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+  '/{language}/terms-conditions':
+    get:
+      tags:
+        - user and delegate 
+      description: lang should be "ar" OR "en" ONLY
+      operationId: terms-conditions
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  '/{language}/get-countries':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: get-countries
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  '/{language}/get-cities/{country_id}':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: get-cities
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: country_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+ 
+  /get-images-path:
+    get:
+      tags:
+        - user 
+      description: ''
+      operationId: get-images-path
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  '/{language}/list-banks':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: list all banks for payment operation
+      operationId: listBanks
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /bank-payment:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: bank-payment
+      parameters:
+        - in: query
+          name: payment_duration_id
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: bank_id
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: client_name
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: client_accountNum
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: iban
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: phone
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: transfer_recipt
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /request-balance:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      description: ''
+      operationId: request-balance
+      parameters:
+        - in: query
+          name: value
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: firstName
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: lastName
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: accountNum
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: mobileNum
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+  /payment-online:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - user 
+      description: ''
+      operationId: payment-online
+      parameters:
+        - in: query
+          name: amount
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: merchant_reference
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: currency
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: fort_id
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: payment_option
+          required: true
+          style: form
+          schema:
+            type: integer
+        - in: query
+          name: order_description
+          required: true
+          style: form
+          schema:
+            type: string
+        - in: query
+          name: customer_ip
+          required: true
+          style: form
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not Found
+        default:
+          description: Unexpected error
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

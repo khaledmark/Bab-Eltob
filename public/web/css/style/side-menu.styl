@@ -1,0 +1,94 @@
+/*################### side menu ####################*/
+.side-menu
+        position absolute
+        z-index 9
+        left 0
+        right 0
+        top 0
+        @media screen and (min-width: 767px)
+            display none
+        .side-menu-header
+            height 90px
+            position fixed
+            left 0
+            right 0
+            top 0
+            z-index 5
+            display inline-block
+            transition 0.5s
+            background-color transparent
+            .open-menu
+                color #fff !important
+                font-size 35px
+                padding 0 20px
+                float left
+                > i
+                    margin-top 20px
+            .logo-img
+                float right
+                padding 5px
+                width 65%
+                @media screen and (min-width: 660px)
+                    width 40%
+                > img
+                    width 130px
+                    height 70px
+                    float right 
+        .menu2
+            position fixed
+            width 0
+            background-color white !important
+            display inline-block
+            transition 0.5s
+            z-index 5
+            overflow hidden
+            height 100%
+            left 0
+            text-align center
+            border 1px solid secondcolor
+            text-align left
+            .close-menu
+                color secondcolor !important
+                font-size 25px
+                float left 
+                margin-right 20px
+                margin-top 10px
+                width 35px
+                text-align center
+                border-radius 50%
+            ul
+                list-style-type none
+                padding 20px
+                margin-top 60px
+                margin-right 20px
+                li
+                    padding 5px 0
+                    display block
+                    width 100%
+                    a
+                        text-decoration none
+                        color  secondcolor !important
+                        font-size 17px
+                        font-family 'TheSans'
+                        text-align right  
+                        @media screen and (max-width: 450px)
+                            font-size 14px
+                            padding 10px 0
+                        &:hover
+                            color  maincolor !important
+                            background-color white
+            .social
+                text-align right 
+                a 
+                    color bluecolor 
+                    &:hover
+                        text-decoration none      
+
+
+            
+
+                  
+                  
+
+ 
+                 

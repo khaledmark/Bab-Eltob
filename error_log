@@ -1,0 +1,1 @@
+[26-Jul-2018 09:46:14 UTC] PHP Fatal error:  Cannot redeclare App\Invoice::user() in /home2/mertaahc/public_html/app/Invoice.php on line 28
